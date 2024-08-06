@@ -1,0 +1,2 @@
+1.测试Error at line 21: It is a clone of previous line.
+因为时间戳重复，很疑惑为什么会有重复，推测可能是bochs的速度太快了，导致一个时间戳内运行好几次

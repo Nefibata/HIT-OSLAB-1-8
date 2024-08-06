@@ -1,0 +1,2 @@
+1.如果环境用的是wsl1不是wsl2，则运行make all的时候会报错，./run: 12: ./run: ./bochs/bochs-gdb: exec format error，推测是因为wsl1不是运行的完整linux内核因此引起的报，wsl2改为了完整内核不报错。
+2.成功运行./run后bochs卡住黑屏，需要手动在终端输入c才能继续

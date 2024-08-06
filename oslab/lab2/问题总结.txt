@@ -1,0 +1,44 @@
+1.使用wsl2遇到 mount: /home/zxk/oslab/hdc: unknown filesystem type 'minix'. 报错
+是wls2的linu内核问题，采用解决方法链接：
+
+https://blog.csdn.net/weixin_60738001/article/details/130739183
+自主编译内核
+
+下载内核源码：WSL2 Linux内核源码仓库-Releases · microsoft/WSL2-Linux-Kernel (github.com)
+
+可以选择你目前正在使用的内核的版本，其他也可。
+
+# 内核源码主目录
+# Install the build dependencies
+$ sudo apt install build-essential flex bison dwarves libssl-dev libelf-dev
+# 添加编译选项文件
+hhw@hhw:~/WSL_source/WSL2-Linux-Kernel-linux-msft-wsl-6.1.21.2$ cp ./Microsoft/config-wsl ./.config
+hhw@hhw:~/WSL_source/WSL2-Linux-Kernel-linux-msft-wsl-6.1.21.2$ ls -l .config
+-rw-r--r-- 1 hhw hhw 114539 May 17 23:39 .config
+# 编辑.config，找到有关MINIX的编译选项，修改为：
+# CONFIG_MINIX_SUBPARTITION=y
+# CONFIG_MINIX_FS=y
+# make -j16 多线程编译
+hhw@hhw:~/WSL_source/WSL2-Linux-Kernel-linux-msft-wsl-6.1.21.2$ make -j16
+
+内核替换
+windows11上默认内核路径为：
+
+C:\Windows\System32\lxss\tools\kernel
+kernel文件即为我们的Linux内核。
+
+你可以重命名编译好的内核kernel_6.1.21.2_minix为kernel，然后直接替换。
+
+也可以通过修改WSL2的配置文件来指定所使用的内核。
+
+将kernel_6.1.21.2_minix内核文件复制到\tools\下（或其他任何地方）
+
+配置文件目录：C:\Users\uername\.wslconfig，添加内容如下：
+
+[wsl2]
+kernel=C:\\Windows\\System32\\lxss\\tools\\kernel_6.1.21.2_minix
+则可以指定所有的Linux分发版使用该文件目录指定的内核。
+
+注意，替换前需要先关闭所有的wsl2 linux的shell窗口，然后将所有分发关机：
+
+2 遇到改了unistd.h不生效的问题，查了资料发现需要挂载hd文件以后在hd文件里改,因为在linux0.11环境中头文件都在user\incloud里面和linux0.11源码里面的不一致

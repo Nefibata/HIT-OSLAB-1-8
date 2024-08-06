@@ -1,0 +1,11 @@
+1 gdtr 值为0x0000000000005cb8
+其ldt位置为0x0000000000005d20
+之后得到ldt的物理位置
+其变量真实物理地址为0x00fa3004
+之后与实验手册就没有差别了
+2 遇到编译报错
+/usr/bin/ld: cannot find crt1.o: No such file or directory
+/usr/bin/ld: cannot find crti.o: No such file or directory
+/usr/bin/ld: cannot find -lgcc_s
+collect2: ld returned 1 exit status
+不会解决。。。没法印证编译问题

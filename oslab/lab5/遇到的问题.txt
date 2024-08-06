@@ -1,0 +1,2 @@
+1.linux0.11下编译不通过报错 return of pointer from integer lacks a cast
+无法解决，暂时无法进行，待以后找到问题所在再说，按理说代码逻辑是可以说的通的
